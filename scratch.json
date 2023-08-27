@@ -1,0 +1,71 @@
+{
+  "store": {
+    "book": [
+      {
+        "category": "fiction",
+        "author": "Herman Melville",
+        "title": "Moby Dick",
+        "isbn": "1-55555-555-5",
+        "price": 8.99,
+        "tags": ["classic", "whale", "ship", "Ahab"],
+        "available": true,
+        "reviews": [
+          {
+            "user": "ahab123",
+            "comment": "A truly captivating tale!",
+            "rating": 5
+          },
+          {
+            "user": "whaleWatcher",
+            "comment": "Not a fan of the portrayal of Moby.",
+            "rating": 3
+          }
+        ]
+      },
+      {
+        "category": "science",
+        "author": "Albert Einstein",
+        "title": "Relativity: The Special and the General Theory",
+        "isbn": "9-78763-559-9",
+        "price": 11.99,
+        "tags": ["physics", "relativity", "science"],
+        "available": false,
+        "reviews": [
+          {
+            "user": "sciGeek99",
+            "comment": "A deep dive into Einstein's groundbreaking work.",
+            "rating": 5
+          }
+        ]
+      }
+    ],
+    "bicycle": {
+      "color": "red",
+      "price": 19.95,
+      "stock": 12,
+      "tags": ["two-wheel", "pedal-power"],
+      "relatedItems": [
+        {
+          "type": "helmet",
+          "price": 15.5
+        },
+        {
+          "type": "bell",
+          "price": 3.7
+        }
+      ]
+    }
+  },
+  "salesTax": 7.25,
+  "currency": "USD",
+  "promoCodes": {
+    "SUMMER2023": {
+      "discount": "15%",
+      "expires": "2023-08-31"
+    },
+    "WELCOME10": {
+      "discount": "10%",
+      "expires": "2024-01-01"
+    }
+  }
+}

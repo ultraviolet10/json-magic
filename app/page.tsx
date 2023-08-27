@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useChat } from "ai/react";
+import { useToast } from "@/components/ui/use-toast";
 
-import PromptButtons from "./page-components/PromptSection";
+import PromptSection from "./page-components/PromptSection/PromptSection";
 
 import AceEditor from "react-ace";
 
@@ -13,6 +14,7 @@ import "ace-builds/src-noconflict/theme-monokai";
 
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const { toast } = useToast();
 
   const [jsonInput, setJsonInput] = useState<string>("");
   const [isValidJson, setIsValidJson] = useState<boolean>(true);
@@ -85,7 +87,12 @@ export default function Chat() {
           />
 
           <button
-            onClick={handleBeautify}
+            onClick={() => {
+              handleBeautify();
+              toast({
+                description: "Done!",
+              });
+            }}
             className="self-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
           >
             Beautify
@@ -104,10 +111,9 @@ export default function Chat() {
           />
         </div>
       ) : (
-        <div className="h-4/5">
+        <div className="h-[90%]">
           <div className="flex flex-col w-full max-w-md py-24 mx-auto h-full justify-between">
-            {/* Messages Section */}
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex flex-col h-[800px] overflow-y-auto border border-dark-200 rounded-lg mb-5">
               {messages.length > 0
                 ? messages.map((m) => (
                     <div key={m.id} className="whitespace-pre-wrap">
@@ -118,11 +124,11 @@ export default function Chat() {
                 : null}
             </div>
 
-            {/* Cards & Form Section */}
-            <PromptButtons
+            <PromptSection
               input={input}
               handleInputChange={handleInputChange}
               handleSubmit={handleSubmit}
+              payload={formattedJson}
             />
           </div>
         </div>
