@@ -4,7 +4,7 @@ export enum PromptState {
   // @todo figure out tf
   INITIAL = "INITIAL",
   FRONTEND = "frontend",
-  // Additional states...
+  // BACKEND = "backend",
 }
 
 export const optionsMap = {

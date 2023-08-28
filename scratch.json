@@ -2,7 +2,7 @@
   "store": {
     "book": [
       {
-        "category": "fiction",
+        "category": null,
         "author": "Herman Melville",
         "title": "Moby Dick",
         "isbn": "1-55555-555-5",
