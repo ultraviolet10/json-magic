@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { CardDescription } from "../ui/card";
-import { generateJSONSchema } from "@/lib/tool";
+import { generateJSONSchema, generateSimpleJsonTree } from "@/lib/tool";
 import ReactJson from "react-json-view";
 
 interface AnalysisPanelProps {
@@ -16,13 +16,17 @@ const AnalysisPanel: React.FC<AnalysisPanelProps> = ({
   jsonData,
 }) => {
   const [jsonSchema, setJsonSchema] = useState({});
+  const [jsonTree, setJsonTree] = useState({});
 
   useEffect(() => {
     if (jsonData) {
       const schema = generateJSONSchema(JSON.parse(jsonData));
+      const tree = generateSimpleJsonTree(JSON.parse(jsonData));
+
       setJsonSchema(schema);
+      setJsonTree(tree);
     }
-  }, [isVisible, jsonData]);
+  }, [jsonData]);
 
   const variants = {
     hidden: { x: "100%" },
@@ -56,17 +60,31 @@ const AnalysisPanel: React.FC<AnalysisPanelProps> = ({
           </div>
 
           {jsonData ? (
-            <div className="flex flex-col space-y-2 items-start w-full">
-              <CardDescription className="text-[17px] text-black">
-                JSON Schema
-              </CardDescription>
-              <ReactJson
-                src={jsonSchema}
-                collapsed={2}
-                enableClipboard={true}
-                name={null}
-                theme="threezerotwofour"
-              />
+            <div className="flex flex-col space-y-4 items-start w-full">
+              <div className="flex flex-col space-y-2 items-start w-full">
+                <CardDescription className="text-[17px] text-black">
+                  JSON Schema
+                </CardDescription>
+                <ReactJson
+                  src={jsonSchema}
+                  collapsed={2}
+                  enableClipboard={true}
+                  name={null}
+                  theme="threezerotwofour"
+                />
+              </div>
+              <div className="flex flex-col space-y-2 items-start w-full">
+                <CardDescription className="text-[17px] text-black">
+                  JSON Tree
+                </CardDescription>
+                <ReactJson
+                  src={jsonTree}
+                  collapsed={2}
+                  enableClipboard={true}
+                  name={null}
+                  theme="threezerotwofour"
+                />
+              </div>
             </div>
           ) : (
             <pre>{`No json to analyse :(`}</pre>

@@ -3,3 +3,9 @@ export enum PromptSubject {
   BACKEND = "backend",
   SMART_CONTRACT = "SC",
 }
+
+export interface SimpleJsonTreeNode {
+  key?: string | number;
+  value?: any;
+  children?: SimpleJsonTreeNode[];
+}

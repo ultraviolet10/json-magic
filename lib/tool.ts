@@ -1,3 +1,5 @@
+import { SimpleJsonTreeNode } from "@/types/common";
+
 const regexWebUrl = new RegExp(
   "^" +
     // protocol identifier (optional)
@@ -127,3 +129,28 @@ export const generateJSONSchema = (data: any): any => {
       return {};
   }
 };
+
+export function generateSimpleJsonTree(
+  data: any,
+  key?: string | number
+): SimpleJsonTreeNode {
+  let node: SimpleJsonTreeNode = {};
+
+  if (Array.isArray(data)) {
+    node.children = data.map((item, index) =>
+      generateSimpleJsonTree(item, index)
+    );
+  } else if (data && typeof data === "object") {
+    node.children = Object.entries(data).map(([k, v]) =>
+      generateSimpleJsonTree(v, k)
+    );
+  } else {
+    node.value = data;
+  }
+
+  if (key !== undefined) {
+    node.key = key;
+  }
+
+  return node;
+}
