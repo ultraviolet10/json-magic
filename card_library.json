@@ -7,11 +7,7 @@
         "name": "Alexander the Great",
         "rarity": "Epic",
         "costs": [
-          {
-            "statId": 1,
-            "value": 8,
-            "$type": "CCGKit.PayResourceCost"
-          }
+          { "statId": 1, "value": 8, "$type": "CCGKit.PayResourceCost" }
         ],
         "properties": [
           {

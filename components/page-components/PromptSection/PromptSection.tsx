@@ -27,7 +27,6 @@ const PromptSection: FC<PromptSectionProps> = ({
   );
 
   const handleSubjectClick = (subject: PromptSubject | string) => {
-    console.log(subject);
     if (subject in optionsMap) {
       setCurrentState(subject as PromptState);
       handleSubmit({ preventDefault: () => {} } as FormEvent<HTMLFormElement>);

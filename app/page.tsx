@@ -13,10 +13,6 @@ import "ace-builds/src-noconflict/theme-terminal";
 import { Range } from "ace-builds";
 import "../ext-styles/common.css";
 
-interface JsonValue {
-  [key: string]: any;
-}
-
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
   const editorRef = useRef<AceEditor | null>(null);
@@ -84,16 +80,16 @@ export default function Chat() {
       <AnimatePresence>
         {isBlankSlateVisible && (
           <motion.div
-            initial={{ y: "-100%" }}
+            initial={{ y: "100%" }}
             animate={{ y: 0 }}
-            exit={{ y: "-100%" }}
+            exit={{ y: "100%" }}
             transition={{ duration: 0.5 }}
             onClick={() => setBlankSlateVisible(false)}
-            className="flex items-center justify-center h-[80px] bg-gray-800 cursor-pointer"
+            className="flex flex-row items-center justify-center space-x-4 h-[80px] bg-gray-800 cursor-pointer"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-white"
+              className="h-4 w-4 text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -105,6 +101,7 @@ export default function Chat() {
                 d="M5 10l7-7m0 0l7 7m-7-7v18"
               />
             </svg>
+            <span className="text-white font-ligo text-[20px]">{`✨ Ask me anything`}</span>
           </motion.div>
         )}
         <AnalysisPanel
@@ -193,11 +190,11 @@ export default function Chat() {
             exit={{ y: "100%" }}
             transition={{ duration: 0.5 }}
             onClick={() => setBlankSlateVisible(true)}
-            className="flex items-center justify-center h-[80px] bg-gray-800 cursor-pointer"
+            className="flex flex-row items-center justify-center space-x-4 h-[80px] bg-gray-800 cursor-pointer"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-white"
+              className="h-4 w-4 text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -209,6 +206,7 @@ export default function Chat() {
                 d="M19 14l-7 7m0 0l-7-7m7 7V3"
               />
             </svg>
+            <span className="text-white font-ligo text-[20px]">{`✨ Ask me anything`}</span>
           </motion.div>
         )}
       </AnimatePresence>

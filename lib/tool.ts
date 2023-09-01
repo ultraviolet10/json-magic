@@ -154,3 +154,16 @@ export function generateSimpleJsonTree(
 
   return node;
 }
+
+// frontend development 
+// creating types for it
+// type for cards, items, rarity, keywords, stats
+// framework doesn't matter - optimise for language
+// using json schema to remodel json
+// histogram of rarities - later
+// rarities vs attack stat - later
+// mock data with json schema
+// context of key, make a call to mockaroo
+// filtering - jq
+// type gen
+// backend migrations - api call to mock data, represent in json
