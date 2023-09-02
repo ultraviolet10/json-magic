@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import { useChat } from "ai/react";
 import { Message } from "ai";
 import CodeBlockRender from "./CodeBlockRender";
+import useJsonStore from "@/store/useStore";
 
 interface AnalysisPanelProps {
   isVisible: boolean;
@@ -20,6 +21,7 @@ const AnalysisPanel: React.FC<AnalysisPanelProps> = ({
   jsonData,
 }) => {
   const { messages, handleInputChange, handleSubmit } = useChat();
+  const { setSchema } = useJsonStore();
 
   const [jsonSchema, setJsonSchema] = useState({});
   const [jsonTree, setJsonTree] = useState({});
@@ -33,6 +35,8 @@ const AnalysisPanel: React.FC<AnalysisPanelProps> = ({
     if (jsonData) {
       const schema = generateJSONSchema(JSON.parse(jsonData));
       const tree = generateSimpleJsonTree(JSON.parse(jsonData));
+
+      setSchema(schema);
 
       setJsonSchema(schema);
       setJsonTree(tree);
