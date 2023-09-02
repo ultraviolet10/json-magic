@@ -167,3 +167,8 @@ export function generateSimpleJsonTree(
 // filtering - jq
 // type gen
 // backend migrations - api call to mock data, represent in json
+
+// generate types
+// show them well
+// fluff up UI, fix padding etc
+// add in support for parsers in typescript/javascript

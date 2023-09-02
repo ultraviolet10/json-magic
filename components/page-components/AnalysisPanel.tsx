@@ -6,6 +6,7 @@ import ReactJson from "react-json-view";
 import { Button } from "../ui/button";
 import { useChat } from "ai/react";
 import { Message } from "ai";
+import CodeBlockRender from "./CodeBlockRender";
 
 interface AnalysisPanelProps {
   isVisible: boolean;
@@ -23,6 +24,8 @@ const AnalysisPanel: React.FC<AnalysisPanelProps> = ({
   const [jsonSchema, setJsonSchema] = useState({});
   const [jsonTree, setJsonTree] = useState({});
   const [responseMessage, setResponseMessage] = useState<string | null>(null);
+
+  const [showTypes, setShowTypes] = useState<boolean>(false);
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -42,7 +45,6 @@ const AnalysisPanel: React.FC<AnalysisPanelProps> = ({
         message.role ===
         "assistant" /* && (any additional criteria if needed) */
       ) {
-        console.log("??", message.content);
         setResponseMessage(message.content);
         break; // If you only expect one such message, break out of the loop once found
       }
@@ -64,6 +66,9 @@ const AnalysisPanel: React.FC<AnalysisPanelProps> = ({
   };
 
   const handleTypesButtonClick = () => {
+    // show text area for generated types
+    setShowTypes(true);
+
     const typeQuery = `Given the JSON schema:
 
     ${JSON.stringify(jsonSchema, null, 2)}
@@ -74,8 +79,6 @@ const AnalysisPanel: React.FC<AnalysisPanelProps> = ({
     handleInputChange({
       target: { value: typeQuery },
     } as ChangeEvent<HTMLInputElement>);
-
-    console.log({ messages });
   };
 
   return (
@@ -124,23 +127,25 @@ const AnalysisPanel: React.FC<AnalysisPanelProps> = ({
                   </form>
                 </div>
                 <div className="w-full flex flex-col space-y-4 items-center justify-center">
-                  <ReactJson
-                    src={jsonSchema}
-                    collapsed={2}
-                    enableClipboard={true}
-                    name={null}
-                    theme="threezerotwofour"
-                  />
-                  <div className="flex flex-col h-[200px] w-full overflow-y-auto border border-dark-200 rounded-lg">
-                    {messages.length > 0
-                      ? messages.map((m) => (
-                          <div key={m.id} className="whitespace-pre-wrap">
-                            {m.role === "user" ? "User: " : "AI: "}
-                            {m.content}
-                          </div>
-                        ))
-                      : null}
+                  <div className="w-full">
+                    <ReactJson
+                      src={jsonSchema}
+                      collapsed={2}
+                      enableClipboard={true}
+                      name={null}
+                      theme="threezerotwofour"
+                    />
                   </div>
+
+                  {showTypes && (
+                    <div className="w-full">
+                      <li className="flex flex-col gap-1 h-[400px] overflow-y-auto border-[1px] rounded-lg border-emerald-300">
+                        <div className="flex flex-row justify-between">
+                          <CodeBlockRender code={responseMessage} />
+                        </div>
+                      </li>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex flex-col space-y-2 items-start w-full">
