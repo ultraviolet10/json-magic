@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "ace-builds": "^1.24.2",
     "autoprefixer": "^10.4.15",
+    "clsx": "^2.0.0",
     "next": "13.4.19",
     "postcss": "^8.4.29",
     "react": "18.2.0",
+    "react-ace": "^10.1.0",
     "react-dom": "18.2.0",
-    "tailwindcss": "^3.3.3"
+    "react-json-view": "^1.21.3",
+    "tailwindcss": "^3.3.3",
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "eslint": "8.49.0",
